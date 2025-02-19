@@ -41,58 +41,68 @@ python manage.py runserver
 #### POST /api/auth/register/
 
 #### Тело запроса (JSON):
+```bash
 {
   "username": "tletay",
   "password": "password4567",
   "role": "user",
   "city": "Taraz"
 }
+```
 
 #### Ответ (201 Created):
-
+```bash
 {
   "id": 1,
   "username": "user123",
   "role": "user",
   "city": "London"
 }
+```
 
 #### Авторизация (получение JWT-токена)
 #### POST /api/auth/login/
 
 #### Тело запроса (JSON):
+```bash
 {
   "username": "tletay",
   "password": "password4567"
 }
+```
 
 #### Ответ (200 OK):
-
+```bash
 {
   "access": "jwt_access_token",
   "refresh": "jwt_refresh_token"
 }
+```
 
 ### 2. Получение погоды
 #### Добавление города (Только для менеджеров)
 #### POST /api/city/add/
 
 #### Тело запроса (JSON):
+```bash
 {
   "name": "Uralsk"
 }
+```
 
 #### Ответ (201 Created):
-
+```bash
 {
   "id": 8,
   "name": "Uralsk"
 }
+```
 
 #### Получение погоды Только для аутентифицированных пользователей
 #### GET /api/weather/
 
 #### Ответ (200 OK):
+```bash
 {
     "id": 4,
     "city": {
@@ -103,26 +113,29 @@ python manage.py runserver
     "description": "overcast clouds",
     "updated_at": "2025-02-19T19:54:39.747498Z"
 }
+```
 
 #### Если у пользователя не указан город:
-
+```bash
 {
   "error": "Город не указан"
 }
+```
 
 #### Если город не найден в базе:
-
+```bash
 {
   "error": "Город не найден в базе данных"
 }
+```
 
 #### Если API погоды недоступен:
-
+```bash
 {
   "error": "Ошибка при запросе погоды: ..."
 }
-
+```
 
 Логика ролей:
-user — должен указывать свой город
-manager — не указывает город но может добавлять города в базу
+- user — должен указывать свой город
+- manager — не указывает город но может добавлять города в базу
