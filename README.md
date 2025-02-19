@@ -11,15 +11,19 @@ cd WeatherApp
 ```
 
 ### 2.  Установка зависимостей
+```bash
 pip install -r requirements.txt
+```
 
 ### 3. Настройка базы данных (PostgreSQL)
+```bash
 CREATE DATABASE weather;
 CREATE USER fruzzy WITH PASSWORD '05110202';
 ALTER ROLE fruzzy SET client_encoding TO 'utf8';
 ALTER ROLE fruzzy SET default_transaction_isolation TO 'read committed';
 ALTER ROLE fruzzy SET timezone TO 'UTC';
 GRANT ALL PRIVILEGES ON DATABASE weather TO fruzzy;
+```
 
 ### 4. Применение миграций
 ```bash
@@ -30,13 +34,13 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-##API Документация
+## API Документация
 
-###1. Аутентификация
-####Регистрация пользователя
-####POST /api/auth/register/
+### 1. Аутентификация
+#### Регистрация пользователя
+#### POST /api/auth/register/
 
-####Тело запроса (JSON):
+#### Тело запроса (JSON):
 {
   "username": "tletay",
   "password": "password4567",
@@ -44,7 +48,7 @@ python manage.py runserver
   "city": "Taraz"
 }
 
-####Ответ (201 Created):
+#### Ответ (201 Created):
 
 {
   "id": 1,
@@ -53,42 +57,42 @@ python manage.py runserver
   "city": "London"
 }
 
-####Авторизация (получение JWT-токена)
-####POST /api/auth/login/
+#### Авторизация (получение JWT-токена)
+#### POST /api/auth/login/
 
-####Тело запроса (JSON):
+#### Тело запроса (JSON):
 {
   "username": "tletay",
   "password": "password4567"
 }
 
-####Ответ (200 OK):
+#### Ответ (200 OK):
 
 {
   "access": "jwt_access_token",
   "refresh": "jwt_refresh_token"
 }
 
-###2. Получение погоды
-####Добавление города (Только для менеджеров)
-####POST /api/city/add/
+### 2. Получение погоды
+#### Добавление города (Только для менеджеров)
+#### POST /api/city/add/
 
-####Тело запроса (JSON):
+#### Тело запроса (JSON):
 {
   "name": "Uralsk"
 }
 
-####Ответ (201 Created):
+#### Ответ (201 Created):
 
 {
   "id": 8,
   "name": "Uralsk"
 }
 
-####Получение погоды Только для аутентифицированных пользователей
-####GET /api/weather/
+#### Получение погоды Только для аутентифицированных пользователей
+#### GET /api/weather/
 
-####Ответ (200 OK):
+#### Ответ (200 OK):
 {
     "id": 4,
     "city": {
@@ -100,19 +104,19 @@ python manage.py runserver
     "updated_at": "2025-02-19T19:54:39.747498Z"
 }
 
-####Если у пользователя не указан город:
+#### Если у пользователя не указан город:
 
 {
   "error": "Город не указан"
 }
 
-####Если город не найден в базе:
+#### Если город не найден в базе:
 
 {
   "error": "Город не найден в базе данных"
 }
 
-####Если API погоды недоступен:
+#### Если API погоды недоступен:
 
 {
   "error": "Ошибка при запросе погоды: ..."
